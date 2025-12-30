@@ -1,0 +1,210 @@
+<!-- ================= CHAT WIDGET STYLES ================= -->
+<style>
+    /* Do NOT touch body styles in partials */
+    
+    /* ================= CHAT BUTTON ================= */
+    #chat-widget-button {
+        position: fixed;
+        bottom: 27px;
+        right: 27px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #f57c00, #e53935);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1001;
+        box-shadow: 0 8px 20px rgba(245, 124, 0, 0.6);
+    }
+
+    #chat-widget-button img {
+        width: 28px;
+        height: 28px;
+        display: block;
+    }
+
+    /* ================= CHAT CONTAINER ================= */
+    #chat-widget-container {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 360px;
+        height: 520px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    /* Header */
+    #chat-widget-header {
+        background: linear-gradient(135deg, #f57c00, #e53935);
+        color: #fff;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+    }
+
+    #chat-widget-header button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    /* Body */
+    #chat-widget-body {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: #fafafa;
+    }
+
+    /* Messages */
+    .chat-msg {
+        max-width: 80%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .user {
+        background: #f57b00da;
+        color: white;
+        margin-left: auto;
+        border-top-right-radius: 4px;
+    }
+
+    .bot {
+        background: #f1f0ff;
+        color: #2d2d2d;
+        margin-right: auto;
+        border-top-left-radius: 4px;
+    }
+
+    /* Footer */
+    #chat-widget-footer {
+        padding: 14px;
+        border-top: 1px solid #e5e5e5;
+        display: flex;
+        gap: 10px;
+        background: #fff;
+    }
+
+    #chat-widget-input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        outline: none;
+        font-size: 14px;
+    }
+
+    #chat-widget-send {
+        background: #f57c00;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+</style>
+
+<!-- ================= CHAT BUBBLE BUTTON ================= -->
+<button id="chat-widget-button">Chat</button>
+
+<!-- ================= CHAT WIDGET ================= -->
+<div id="chat-widget-container">
+    <div id="chat-widget-header">
+        <span>Unnati • Assistant</span>
+        <button onclick="closeChatWidget()">✖</button>
+    </div>
+
+    <div id="chat-widget-body">
+        <div class="chat-msg bot">
+            Hi 👋 I’m Unnati, your virtual assistant. How can I help you today?
+        </div>
+    </div>
+
+    <div id="chat-widget-footer">
+        <input id="chat-widget-input" placeholder="Type your message..." />
+        <button id="chat-widget-send">Send</button>
+    </div>
+</div>
+
+<!-- ================= CHAT WIDGET SCRIPT ================= -->
+<script>
+    window.ChatWidgetConfig = {
+        webhook: {
+            url: 'http://localhost:5678/webhook/5741ea9e-2e9b-42f8-97ac-99565953fdb8/chat',
+            route: 'general'
+        }
+    };
+
+    function getChatId() {
+        let chatId = sessionStorage.getItem("chatId");
+        if (!chatId) {
+            chatId = "chat_" + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem("chatId", chatId);
+        }
+        return chatId;
+    }
+
+    document.getElementById("chat-widget-button").addEventListener("click", function () {
+        document.getElementById("chat-widget-container").style.display = "flex";
+        document.getElementById("chat-widget-button").style.display = "none";
+    });
+
+    function closeChatWidget() {
+        document.getElementById("chat-widget-container").style.display = "none";
+        document.getElementById("chat-widget-button").style.display = "flex";
+    }
+
+    document.getElementById("chat-widget-send").addEventListener("click", function () {
+        let message = document.getElementById("chat-widget-input").value;
+        if (message.trim() === "") return;
+
+        let chatBody = document.getElementById("chat-widget-body");
+
+        let userMessage = document.createElement("div");
+        userMessage.classList.add("chat-msg", "user");
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        let chatId = getChatId();
+
+        fetch(window.ChatWidgetConfig.webhook.url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chatId: chatId,
+                message: message,
+                route: window.ChatWidgetConfig.webhook.route
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            let botMessage = document.createElement("div");
+            botMessage.classList.add("chat-msg", "bot");
+            botMessage.innerHTML = data.output || "Sorry, I couldn't understand that.";
+            chatBody.appendChild(botMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        })
+        .catch(error => console.error("Error:", error));
+
+        document.getElementById("chat-widget-input").value = "";
+    });
+</script>

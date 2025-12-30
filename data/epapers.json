@@ -1,0 +1,102 @@
+[
+  {
+    "id": 8,
+    "title": "Vidyarthi Mitra Weekly – 14 December 2025",
+    "slug": "14122025eng",
+    "language": "en",
+    "date": "2025-12-14",
+    "pdf": "pdfs/14122025eng.pdf",
+    "audio": "audio/14122025audioeng.mp3",
+    "thumbnail": "",
+    "highlights": [
+      "Weekly education and entrance exam updates",
+      "Important college and scholarship announcements"
+    ],
+    "narration_text": ""
+  },
+  {
+    "id": 7,
+    "title": "Vidyarthi Mitra Weekly – 07 December 2025",
+    "slug": "07122025eng",
+    "language": "en",
+    "date": "2025-12-07",
+    "pdf": "pdfs/07122025eng.pdf",
+    "audio": "",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  },
+    {
+    "id": 6,
+    "title": "Vidyarthi Mitra Weekly – 23 November 2025",
+    "slug": "23112025eng",
+    "language": "en",
+    "date": "2025-11-23",
+    "pdf": "pdfs/23112025eng.pdf",
+    "audio": "",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  },
+  {
+    "id": 5,
+    "title": "Vidyarthi Mitra Weekly – 16 November 2025",
+    "slug": "16112025eng",
+    "language": "en",
+    "date": "2025-11-16",
+    "pdf": "pdfs/16112025eng.pdf",
+    "audio": "",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  },
+  {
+    "id": 4,
+    "title": "Vidyarthi Mitra Weekly – 02 November 2025",
+    "slug": "02112025eng",
+    "language": "en",
+    "date": "2025-11-02",
+    "pdf": "pdfs/02112025eng.pdf",
+    "audio": "",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  },
+  {
+    "id": 3,
+    "title": "Vidyarthi Mitra Weekly – 09 November 2025",
+    "slug": "09112025eng",
+    "language": "en",
+    "date": "2025-11-09",
+    "pdf": "pdfs/09112025eng.pdf",
+    "audio": "",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  },
+  {
+    "id": 2,
+    "title": "Vidyarthi Mitra Weekly – 07 December 2025",
+    "slug": "07122025mar",
+    "language": "mr",
+    "date": "2025-12-07",
+    "pdf": "pdfs/07122025mar.pdf",
+    "audio": "audio/14122025audiomr.mp3",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  },
+  {
+    "id": 1,
+    "title": "Vidyarthi Mitra Weekly – 23 November 2025",
+    "slug": "23112025mar",
+    "language": "mr",
+    "date": "2025-11-23",
+    "pdf": "pdfs/23112025eng.pdf",
+    "audio": "",
+    "thumbnail": "",
+    "highlights": [],
+    "narration_text": ""
+  }
+  
+]
